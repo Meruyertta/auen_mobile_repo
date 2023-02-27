@@ -3,7 +3,7 @@ import 'package:auen/screens/library_screen.dart';
 import 'package:auen/screens/login_screen.dart';
 import 'package:auen/screens/main_screen.dart';
 import 'package:auen/screens/notifications_screen.dart';
-import 'package:auen/screens/profile_screen.dart';
+import 'package:auen/screens/settings_screen.dart';
 import 'package:auen/screens/registration_screen.dart';
 import 'package:auen/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late NavigationCubit _navigationCubit;
 
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -39,71 +38,73 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
-    // final bottomNavigationCubit = context.read<NavigationCubit>();
+
 
     return Scaffold(
-        bottomNavigationBar:
-        BlocBuilder<NavigationCubit, NavigationState>(
-  builder: (context, state) {
-    return BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          selectedItemColor: Colors.white,
-          backgroundColor: Colors.black,
-          currentIndex: state.index,
-          selectedIconTheme: IconThemeData(color: Colors.white),
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined, color: Colors.white,
+      bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationState>(
+        builder: (context, state) {
+          return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: true,
+            selectedItemColor: Colors.white,
+            backgroundColor: Colors.black,
+            currentIndex: state.index,
+            selectedIconTheme: IconThemeData(color: Colors.white),
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: Colors.white,
+                  ),
+                  label: 'Home'),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.apps,
+                  color: Colors.white,
+                ),
+                label: 'Feed',
               ),
-              label: 'Home'
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.apps, color: Colors.white,),
-              label: 'Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search_outlined, color: Colors.white,),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.library_books_sharp, color: Colors.white,),
-              label: 'Library'
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications, color: Colors.white,),
-                label: 'Notifications'
-            ),
-          ],
-          onTap:(index)=> _navigationCubit.changeBottomNavBar(index),
-        );
-  },
-),
-        // body: Center(child: Text("Screen")),
-        body: BlocBuilder<NavigationCubit, NavigationState>(
-            builder: (context, state) {
-              if (state.index == 0) {
-                return MainScreen();
-              } else if (state.index == 1) {
-                return FeedScreen();
-              } else if (state.index == 2) {
-                return SearchScreen();
-              }
-              else if(state.index==3){
-                return LibraryScreen();
-              }
-              else if(state.index==4){
-                return NotificationScreen();
-              }
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.search_outlined,
+                  color: Colors.white,
+                ),
+                label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.library_books_sharp,
+                    color: Colors.white,
+                  ),
+                  label: 'Library'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                  ),
+                  label: 'Notifications'),
+            ],
+            onTap: (index) => _navigationCubit.changeBottomNavBar(index),
+          );
+        },
+      ),
+      // body: Center(child: Text("Screen")),
+      body: BlocBuilder<NavigationCubit, NavigationState>(
+          builder: (context, state) {
+        if (state.index == 0) {
+          return MainScreen();
+        } else if (state.index == 1) {
+          return FeedScreen();
+        } else if (state.index == 2) {
+          return SearchScreen();
+        } else if (state.index == 3) {
+          return LibraryScreen();
+        } else if (state.index == 4) {
+          return NotificationScreen();
+        }
 
-              return SizedBox();
-            }),
-
-        );
+        return SizedBox();
+      }),
+    );
   }
-
-
 }

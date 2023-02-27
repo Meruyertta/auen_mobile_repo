@@ -24,9 +24,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           "Notifications",
           style: appBarTextStyle,
         ),
-        leading: Icon(
-          Icons.arrow_back_ios
-        ),
+        leading: Icon(Icons.arrow_back_ios),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -34,10 +32,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: [
             Row(
               children: [
-                Text("Later", style: mainTextStyle,),
+                Text(
+                  "Later",
+                  style: mainTextStyle,
+                ),
               ],
             ),
-            SizedBox(height: h*0.04,),
+            SizedBox(
+              height: h * 0.04,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -45,8 +48,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   radius: 15,
                   backgroundImage: AssetImage("assets/image/user.png"),
                 ),
-                Text("bloodkatana followed you", style: mainTextStyleGrey,),
-                CustomButton(text: "Follow",)
+                Text(
+                  "bloodkatana followed you",
+                  style: mainTextStyleGrey,
+                ),
+                CustomButton(
+                  text: "Follow",
+                )
               ],
             )
           ],

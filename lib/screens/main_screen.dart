@@ -14,37 +14,56 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    double h=MediaQuery.of(context).size.height;
-    double w=MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
 
-    List<String> songs=['1503','Whatsapp','В манерах', 'По пятам','Свела с ума',];
+    List<String> songs = [
+      '1503',
+      'Whatsapp',
+      'В манерах',
+      'По пятам',
+      'Свела с ума',
+    ];
 
     // 'Aitarym kop','Bari de onay','Esimde bari','Intro','Garyshka'
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Home", style: appBarTextStyle,),
+        title: Text(
+          "Home",
+          style: appBarTextStyle,
+        ),
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
       body: Padding(
         padding: EdgeInsets.all(15.0),
         child: CustomScrollView(
-          slivers: [ // Other Sliver Widgets
+          slivers: [
+            // Other Sliver Widgets
             SliverList(
               delegate: SliverChildListDelegate([
                 Container(
-                  height: h*0.8,
+                  height: h * 0.8,
                   child: Column(
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(left: w*0.05, right: w*0.05, top: h*0.02),
-                          child: Image.asset("assets/image/main_screen_asset.jpg")),
-                      SizedBox(height: h*0.05,),
+                          padding: EdgeInsets.only(
+                              left: w * 0.05, right: w * 0.05, top: h * 0.02),
+                          child: Image.asset(
+                              "assets/image/main_screen_asset.jpg")),
+                      SizedBox(
+                        height: h * 0.05,
+                      ),
                       Column(
                         children: [
-                          Text("This Month's ", style: mainPageSectionHeaderTextStyle.copyWith(color: Colors.white),),
-                          Text("Record Breaking Albums!", style: mainPageSectionHeaderTextStyle),
+                          Text(
+                            "This Month's ",
+                            style: mainPageSectionHeaderTextStyle.copyWith(
+                                color: Colors.white),
+                          ),
+                          Text("Record Breaking Albums!",
+                              style: mainPageSectionHeaderTextStyle),
                           // RichText(
                           //   text: TextSpan(
                           //     // style: DefaultTextStyle.of(context).style,
@@ -55,85 +74,115 @@ class _MainScreenState extends State<MainScreen> {
                           //     ],
                           //   ),
                           // ),
-                          SizedBox(height: h*0.03,),
+                          SizedBox(
+                            height: h * 0.03,
+                          ),
 
-                          Text("Выходные, Карман , Колёса, Москва любит, Не твоё, Ок, окand many more...", style: TextStyle(color: AppColors.colorGrey),),
-                          SizedBox(height: h*0.05,),
+                          Text(
+                            "Выходные, Карман , Колёса, Москва любит, Не твоё, Ок, окand many more...",
+                            style: TextStyle(color: AppColors.colorGrey),
+                          ),
+                          SizedBox(
+                            height: h * 0.05,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              CustomButton(text: 'Listen Now',),
-                              CustomButton(text: 'Add to Queue',)
+                              CustomButton(
+                                text: 'Listen Now',
+                              ),
+                              CustomButton(
+                                text: 'Add to Queue',
+                              )
                             ],
                           )
                         ],
                       )
                     ],
-
                   ),
                 ),
                 Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Weekly Top 10", style: TextStyle(color: AppColors.accentColorPink, fontSize: 16),),
+                      Text(
+                        "Weekly Top 10",
+                        style: TextStyle(
+                            color: AppColors.accentColorPink, fontSize: 16),
+                      ),
                       ListView(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         children: [
-                         for(var i in songs)
-                           Column(
-                             children: [
-                               Column(
-                                 children: [
-                                   Row(
-                                     children: [
-                                       Expanded(
-
-                                           child: Text((songs.indexOf(i)+1).toString(), style: mainPageTextStyle,)),
-                                       Expanded(
-                                         flex: 10,
-                                         child: Row(
-                                           children: [
-                                             Container(
-                                               child: Image.asset("assets/image/main_screet_player.jpg"),
-                                               width: w*0.1,
-                                             ),
-                                             Column(
-                                               crossAxisAlignment: CrossAxisAlignment.start,
-                                               children: [
-                                                 Text(i, style:mainPageTextStyle,),
-                                                 Text("Alzabi", style: mainPageTextStyle,),
-
-                                               ],
-                                             )
-                                           ],
-                                         ),
-                                       ),
-                                       Expanded(
-                                           flex: 3,
-                                           child:
-                                           Icon(Icons.favorite_border, color: Colors.white,)
-                                       ),
-                                     ],
-                                   ),
-                                   SizedBox(height: h*0.04,)
-                                 ],
-                               ),
-                             ],
-                           )
+                          for (var i in songs)
+                            Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Text(
+                                          (songs.indexOf(i) + 1).toString(),
+                                          style: mainPageTextStyle,
+                                        )),
+                                        Expanded(
+                                          flex: 10,
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                child: Image.asset(
+                                                    "assets/image/main_screet_player.jpg"),
+                                                width: w * 0.1,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    i,
+                                                    style: mainPageTextStyle,
+                                                  ),
+                                                  Text(
+                                                    "Alzabi",
+                                                    style: mainPageTextStyle,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                            flex: 3,
+                                            child: Icon(
+                                              Icons.favorite_border,
+                                              color: Colors.white,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: h * 0.04,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            )
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(child: CustomButton(text: 'See All',))
+                          Expanded(
+                              child: CustomButton(
+                            text: 'See All',
+                          ))
                           // Text('See all', style: mainPageTextStyle,)
                         ],
                       )
                     ],
                   ),
                 ),
+
                 ///SUPPORT PAGE
                 // Container(
                 //   child: Column(
@@ -201,9 +250,8 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class CustomButton extends StatelessWidget {
-   CustomButton({
-    this.text="Listen Now",
-
+  CustomButton({
+    this.text = "Listen Now",
     Key? key,
   }) : super(key: key);
 
@@ -211,22 +259,23 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: (){}, child:
-    Text(text, style: TextStyle(fontSize: 16.0),),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.accentColorDarkerPinkButton,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-        )
-      )
-
-    );
+    return ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 16.0),
+        ),
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.accentColorDarkerPinkButton,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            )));
   }
 }
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({
-    this.hintText='Enter Your Email',
+    this.hintText = 'Enter Your Email',
     Key? key,
   }) : super(key: key);
 
@@ -234,7 +283,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,

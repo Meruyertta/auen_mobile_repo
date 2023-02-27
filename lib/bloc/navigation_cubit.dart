@@ -6,9 +6,9 @@ part 'navigation_state.dart';
 class NavigationCubit extends Cubit<NavigationState> {
   NavigationCubit() : super(NavigationState(0));
 
-  int currentIndex=0;
-  void changeBottomNavBar(int index){
-    currentIndex=index;
+  int currentIndex = 0;
+  void changeBottomNavBar(int index) {
+    currentIndex = index;
     emit(NavigationState(currentIndex));
   }
 

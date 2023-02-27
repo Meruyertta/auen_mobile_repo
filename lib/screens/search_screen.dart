@@ -1,4 +1,5 @@
 import 'package:auen/style/constants.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -18,32 +19,52 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
-        title: Text("Search", style: appBarTextStyle,),
+        title: const Text(
+          "Search",
+          style: appBarTextStyle,
+        ),
       ),
       body: Center(
         child: Column(
           children: [
             Container(
-              width: w*0.9,
-              height: h*0.05,
-              child:  const Center(
+              width: w * 0.9,
+              height: h * 0.05,
+              child: const Center(
                 child: TextField(
                   decoration: InputDecoration(
                     fillColor: Color(0xFF4E5359),
                     filled: true,
                     hintText: 'Search',
                     hintStyle: TextStyle(color: Colors.white70),
-                    prefixIcon: Icon(Icons.search, color: Colors.white,) ,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
                     // suffixIcon: Icon(Icons.camera_alt)
                   ),
                 ),
               ),
             ),
-            SizedBox(height: h*0.35,),
+            SizedBox(
+              height: h * 0.35,
+            ),
+
             Column(
-              children: [
-                Text("Search SoundCloud", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
-                Text("Find artists, tracks, albums, and playlists", style: TextStyle(color: Colors.white70,), )
+              children: const [
+                Text(
+                  "Search SoundCloud",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
+                Text(
+                  "Find artists, tracks, albums, and playlists",
+                  style: TextStyle(
+                    color: Colors.white70,
+                  ),
+                )
               ],
             )
           ],

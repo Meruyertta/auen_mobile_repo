@@ -1,30 +1,33 @@
+import 'package:auen/router/router.dart';
 import 'package:auen/screens/home_screen.dart';
 import 'package:auen/screens/login_screen.dart';
-import 'package:auen/screens/main_screen.dart';
-import 'package:auen/screens/notifications_screen.dart';
-import 'package:auen/screens/profile_screen.dart';
 import 'package:auen/style/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'bloc/navigation_cubit.dart';
+import 'core/error_handler.dart';
 
-void main() {
+String? loggedInEmail;
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ErrorHandler.init();
+  const storage = FlutterSecureStorage();
+  loggedInEmail = await storage.read(key: 'email');
 
-  runApp(
-   MultiProvider(
-     providers: [
-       BlocProvider(
-         create: (context) => NavigationCubit(),
-         child: HomeScreen(),
-       )
-     ],
-    child: MyApp(),
-   )
-  );
+  runApp(MultiProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => NavigationCubit(),
+        child: HomeScreen(),
+      )
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,9 +42,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen()
+      home: const LoginScreen(),
+      builder: EasyLoading.init(),
+      initialRoute: loggedInEmail == null ? AppRouter.login : AppRouter.home,
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }
-
-
