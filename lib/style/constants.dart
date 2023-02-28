@@ -24,5 +24,3 @@ const appBarTextStyle = TextStyle(color: Colors.white, fontSize: 20);
 const mainTextStyle = TextStyle(color: Colors.white, fontSize: 17);
 
 const mainTextStyleGrey = TextStyle(color: Colors.white70, fontSize: 15);
-
-

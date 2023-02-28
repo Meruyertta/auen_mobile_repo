@@ -1,3 +1,4 @@
+import 'package:auen/features/player_arguments.dart';
 import 'package:auen/screens/home_screen.dart';
 import 'package:auen/screens/login_screen.dart';
 import 'package:auen/screens/profile_screen.dart';
@@ -7,7 +8,8 @@ import 'package:auen/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../screens/main_screen.dart';
+import '../../screens/main_screen.dart';
+import '../screens/player_auen.dart';
 
 class AppRouter {
   static const main = '/main';
@@ -18,9 +20,11 @@ class AppRouter {
   static const projects = '/projects';
   static const settings = '/settings';
   static const profile = '/profile';
+  static const player = '/player';
 
 
   static Route generateRoute(RouteSettings routeSettings) {
+    final args=routeSettings.arguments;
     switch (routeSettings.name) {
       case home:
         return MaterialPageRoute(
@@ -49,6 +53,17 @@ class AppRouter {
       case profile:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
+        );
+      case player:
+        return MaterialPageRoute(
+          builder: (context) {
+            PlayerArguments arguments=args as PlayerArguments;
+            return PlayerAuen(
+              url: arguments.url,
+              title: arguments.title,
+              authorName: arguments.authorName,
+            );
+          }
         );
       default:
         return MaterialPageRoute(

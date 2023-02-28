@@ -15,7 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final ApiClient _apiClient=ApiClient();
+  final ApiClient _apiClient = ApiClient();
 
   @override
   void initState() {
@@ -77,18 +77,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     future: _apiClient.getUser(),
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
-                      if(snapshot.hasData){
-                        UserModel user=snapshot.data;
+                      if (snapshot.hasData) {
+                        UserModel user = snapshot.data;
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              user.name??'',
+                              user.name ?? '',
                               style: mainTextStyle.copyWith(
                                   fontWeight: FontWeight.bold),
                             ),
-                             Text(
-                              user.email??'',
+                            Text(
+                              user.email ?? '',
                               style: mainTextStyle,
                             ),
                             Row(

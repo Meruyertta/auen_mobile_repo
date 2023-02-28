@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: AppColors.mainBackgroundBlack  ,
+      backgroundColor: AppColors.mainBackgroundBlack,
       appBar: AppBar(
         backgroundColor: AppColors.accentColorPink,
         centerTitle: true,

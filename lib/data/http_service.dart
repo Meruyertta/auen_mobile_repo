@@ -9,14 +9,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../core/logger.dart';
 import 'package:dio/dio.dart';
 
-
 class HttpService {
   static final _client = http.Client();
   static final _loginUrl =
       Uri.parse('https://kajohny.pythonanywhere.com/login/api');
   static final _profileUrlString =
- 'https://kajohny.pythonanywhere.com/profile/api/';
-  static final dio=Dio();
+      'https://kajohny.pythonanywhere.com/profile/api/';
+  static final dio = Dio();
 
   static login(
     email,
@@ -24,10 +23,13 @@ class HttpService {
     context,
   ) async {
     try {
-      http.Response response = await _client.post(_loginUrl, body: {
-        "email": email,
-        "password": password,
-      },);
+      http.Response response = await _client.post(
+        _loginUrl,
+        body: {
+          "email": email,
+          "password": password,
+        },
+      );
 
       if (response.statusCode == 200) {
         logger.i(jsonDecode(response.body));
@@ -49,5 +51,4 @@ class HttpService {
       logger.e(e.toString());
     }
   }
-
 }

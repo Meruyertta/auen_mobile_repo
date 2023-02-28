@@ -1,6 +1,10 @@
+import 'package:auen/core/models/audio_model.dart';
+import 'package:auen/data/api_client.dart';
+import 'package:auen/features/player_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_search_bar/outline_search_bar.dart';
 
+import '../router/router.dart';
 import '../style/colors/app_colors.dart';
 import '../style/constants.dart';
 
@@ -12,6 +16,17 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final ApiClient _apiClient = ApiClient();
+
+  late bool showAll;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    showAll = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -106,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Weekly Top 10",
+                        "Top Music",
                         style: TextStyle(
                             color: AppColors.accentColorPink, fontSize: 16),
                       ),
@@ -114,70 +129,117 @@ class _MainScreenState extends State<MainScreen> {
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         children: [
-                          for (var i in songs)
-                            Column(
-                              children: [
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                            child: Text(
-                                          (songs.indexOf(i) + 1).toString(),
-                                          style: mainPageTextStyle,
-                                        )),
-                                        Expanded(
-                                          flex: 10,
-                                          child: Row(
+                          Column(
+                            children: [
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: FutureBuilder<List<AudioModel>?>(
+                                      future: _apiClient.getAudioList(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<dynamic> snapshot) {
+                                        if (snapshot.hasData) {
+                                          List<AudioModel> audioList =
+                                              snapshot.data;
+                                          return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Container(
-                                                child: Image.asset(
-                                                    "assets/image/main_screet_player.jpg"),
-                                                width: w * 0.1,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    i,
-                                                    style: mainPageTextStyle,
+                                              for (var i = 0;
+                                                  i < (audioList.length);
+                                                  i++)
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.pushNamed(
+                                                      context,
+                                                      AppRouter.player,
+                                                      arguments: PlayerArguments.name(
+                                                          "https://kajohny.pythonanywhere.com" +
+                                                              (audioList[i]
+                                                                      .musicLink ??
+                                                                  ''),
+                                                          audioList[i].title ??
+                                                              '',
+                                                          audioList[i]
+                                                                  .authorName ??
+                                                              ''),
+                                                    );
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            child: Image.network(
+                                                                "https://kajohny.pythonanywhere.com/static/"+(audioList[i].albumImage??'')
+                                                            ),
+                                                            width: w * 0.1,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                audioList[i]
+                                                                        .title ??
+                                                                    '',
+                                                                style:
+                                                                    mainPageTextStyle,
+                                                              ),
+                                                              Text(
+                                                                audioList[i]
+                                                                        .authorName ??
+                                                                    '',
+                                                                style:
+                                                                    mainPageTextStyle,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Icon(
+                                                        Icons.favorite_border,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    "Alzabi",
-                                                    style: mainPageTextStyle,
-                                                  ),
-                                                ],
-                                              )
+                                                ),
+
                                             ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                            flex: 3,
-                                            child: Icon(
-                                              Icons.favorite_border,
-                                              color: Colors.white,
-                                            )),
-                                      ],
+                                          );
+                                        }
+                                        return CircularProgressIndicator();
+                                      },
                                     ),
-                                    SizedBox(
-                                      height: h * 0.04,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
+                                  ),
+                                  SizedBox(
+                                    height: h * 0.06,
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                              child: CustomButton(
-                            text: 'See All',
-                          ))
-                          // Text('See all', style: mainPageTextStyle,)
-                        ],
+                      InkWell(
+                        onTap: () {
+                          showAll = true;
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: CustomButton(
+                              text: 'See All',
+                            ))
+                            // Text('See all', style: mainPageTextStyle,)
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -280,6 +342,7 @@ class CustomTextField extends StatelessWidget {
   }) : super(key: key);
 
   String hintText;
+
   @override
   Widget build(BuildContext context) {
     return TextField(

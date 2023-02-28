@@ -27,7 +27,7 @@ class _OneLinePrettyPrinter extends PrettyPrinter {
         ? formatStackTrace(StackTrace.current, 1)
         : null;
     final stackTraceStr =
-    event.stackTrace != null ? formatStackTrace(event.stackTrace, 8) : null;
+        event.stackTrace != null ? formatStackTrace(event.stackTrace, 8) : null;
 
     final errorStr = event.error?.toString();
 

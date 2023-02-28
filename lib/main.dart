@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
       title: 'Auen',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Kanit-Regular',
       ),
       home: const LoginScreen(),
       builder: EasyLoading.init(),

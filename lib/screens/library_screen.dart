@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../style/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({Key? key}) : super(key: key);
 
@@ -20,8 +19,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    openProfile=false;
+    openProfile = false;
   }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -48,7 +48,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             width: w * 0.03,
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, AppRouter.profile);
             },
             child: Padding(
@@ -70,18 +70,23 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 for (var i in sections)
                   Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            i,
-                            style: appBarTextStyle,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushReplacementNamed(context, AppRouter.player);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              i,
+                              style: appBarTextStyle,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: h * 0.05,
@@ -142,13 +147,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     children: [
                       Text(
                         "Log out",
-                        style: appBarTextStyle.copyWith(fontSize: 24, color: AppColors.accentColorPink),
+                        style: appBarTextStyle.copyWith(
+                            fontSize: 24, color: AppColors.accentColorPink),
                       ),
                     ],
                   ),
                 ],
               ),
-            ),          ],
+            ),
+          ],
         ),
       ),
     );
